@@ -62,7 +62,7 @@ class AlbumPhotosViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func setSelectButton() {
-        selectButton = UIBarButtonItem(title: "선택", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.selectPhoto(_:)))
+        selectButton = UIBarButtonItem(title: "Select", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.selectPhoto(_:)))
         self.navigationItem.rightBarButtonItem = selectButton
     }
     
@@ -91,11 +91,11 @@ class AlbumPhotosViewController: UIViewController, UICollectionViewDataSource, U
         let fetchOption: PHFetchOptions = PHFetchOptions()
         
         if isLatest {
-            orderButton.title = "과거순"
+            orderButton.title = "Oldest"
             isLatest = false
             fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         } else {
-            orderButton.title = "최신순"
+            orderButton.title = "Latest"
             isLatest = true
             fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         }
@@ -176,12 +176,12 @@ class AlbumPhotosViewController: UIViewController, UICollectionViewDataSource, U
         selectedMode = !selectedMode
         if selectedMode == true {
             selectButton?.title = "취소"
-            self.title = "항목 선택"
+            self.title = "Select Items"
             self.navigationItem.setHidesBackButton(true, animated:true);
             assetCollectionView.allowsMultipleSelection = true
         } else {
             self.navigationItem.title = initTitle
-            selectButton?.title = "선택"
+            selectButton?.title = "Select"
             self.navigationItem.setHidesBackButton(false, animated:true);
             
             self.assetCollectionView.allowsMultipleSelection = false
@@ -293,9 +293,9 @@ class AlbumPhotosViewController: UIViewController, UICollectionViewDataSource, U
             }
 
             if self.selectedAssetIndex.count == 0 {
-                self.title = "항목 선택"
+                self.title = "Select Items"
             } else {
-                self.title = "\(self.selectedAssetIndex.count)"+"장 선택"
+                self.title = "\(self.selectedAssetIndex.count)"+"Photo(s) selected"
             }
             collectionView.reloadItems(at: [indexPath])
         } else {
